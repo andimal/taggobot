@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>tumblrtags</title>
+	</head>
+	<body>
+		<div id="tags"></div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$.post('get_tags.py', { username: 'andimal', limit: 3 }, function(data) {
+				var test = $.parseJSON(data);
+				$(test).each(function() {
+					$('#tags').append(this[0] + ', ' + this[1] + '<br />');
+				});
+			});
+		</script>
+	</body>
+</html>
