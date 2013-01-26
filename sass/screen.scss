@@ -1,0 +1,232 @@
+@import "compass/reset";
+@import "compass/css3";
+
+$dark		:	#333;
+$tumblr		:	#2c4762;
+$tags		:	lighten($dark, 20%);
+$copy		:	#CCC;
+$bookman	:	"Bookman Old Style", serif;
+$input_text	:	2em;
+$link		:	$copy;
+$output		:	green;
+$shadow		:	black;
+$highlight	:	rgba(255,255,255,0.2);
+$highlight2	:	#555;
+
+$default-border-radius		:	4px;
+$default-box-shadow-blur	:	10px;
+$default-box-shadow-h-offset:	-2px;
+
+@mixin arrow($x, $y, $color) {
+	position: absolute;
+	z-index: 50;
+	width: 0; 
+	height: 0; 
+	border-left: $x solid transparent;
+	border-right: $x solid transparent;
+	border-top: $y solid $color;
+}
+
+@mixin low() {
+	@include arrow(30px, 30px, $shadow);
+	bottom: -31px;
+}
+
+@mixin high() {
+	@include arrow(31px, 31px, $highlight);
+	bottom: -33px;
+	right: 99px;
+}
+
+a {
+	color: $link;
+}
+
+body {
+	background-color: $dark;
+	font: 1em $bookman;
+	color: $copy;
+
+	h1, h2 {
+		font-weight: bold;
+	}
+
+	h1 {
+		font-size: 5em;
+	}
+
+	h2 {
+		font-size: 2em;
+		margin: 20px 0;
+	}
+
+	input, select, button {
+		font-size: $input_text;
+		padding: 5px;
+		border: 0;
+		@include border-radius;
+	}
+
+	.arrow {
+		bottom: -30px;
+		right: 100px;
+	}
+
+	header, .bot {
+		border-bottom: 1px solid $shadow;
+	}
+
+	.tags {
+		border-bottom: 1px solid $highlight;
+	}
+
+	.bot, .tags {
+		border-top: 1px solid $highlight;
+	}
+
+	footer {
+		border-top: 1px solid $shadow;
+	}
+
+	header {
+		position: relative;
+		padding: 40px 40px;
+		text-align: center;
+		background-color: $tumblr;
+
+		.arrow {
+			@include arrow(30px, 30px, $tumblr);
+		}
+
+		.low {
+			@include low;
+		}
+
+		.high {
+			@include high;
+		}
+	}
+
+	.bot {
+		position: relative;
+		width: 100%;
+		padding: 60px 0;
+
+		.inside {
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		input, p, select, button {
+			display: inline;
+		}
+
+		input {
+			width: 60%;
+		}
+
+		select {
+			margin-top: 40px;
+		}
+
+		p {
+			font-size: $input_text;
+		}
+
+		.arrow {
+			@include arrow(30px, 30px, $dark);
+		}
+
+		.low {
+			@include low;
+		}
+
+		.high {
+			@include high;
+		}
+	}
+
+	.tags {
+		background-color: $tags;
+		padding: 80px 0;
+		text-align: center;
+
+		.outputter {
+			width: 80%;
+			margin: 0 auto;
+			height: 40px;
+			@include border-radius;
+			background-color: $output;
+
+			.slot {
+				background-color: #222;
+				height: 10px;
+				position: relative;
+				top: 15px;
+				margin: 0 15px 0 10px;
+				@include border-radius(2px);
+			}
+		}
+
+		.output, .output-top {
+			width: 75%;
+			margin: 0 auto;
+			position: relative;
+			left: 5px;
+			height: 10px;
+		}
+
+		.output-top {
+			margin-top: -20px;
+
+			.left, .right {
+				height: 10px;
+				@include border-top-right-radius(10px);
+			}
+
+			.left, .left-shadow {
+				width: 10px;
+				position: absolute;
+				z-index: 2;
+				left: - 11px;
+				bottom: 0;
+			}
+
+			.left {
+				background-color: $output;
+				@include background-image(linear-gradient(top, #222, #222 5px, $output 5px));
+			}
+
+			.left-shadow {
+				height: 5px;
+				@include border-top-right-radius(30px);
+				@include background-image(linear-gradient(left, $output, darken($output, 5%)));
+			}
+			
+			.right {
+				width: 100%;
+				border-right: 1px solid #666;
+				background-color: lighten($dark, 10%);
+				position: relative;
+				left: -10px;
+				padding-right: 10px;
+				@include background-image(linear-gradient(top, darken($dark, 1%), $dark));
+			}
+		}
+
+		.output {
+			background-color: $dark;
+			height: 400px;
+			border-right: 1px solid $highlight2;
+			border-bottom: 1px solid $highlight2;
+			border-left: 1px solid lighten($shadow, 20%);
+			@include box-shadow;
+		}
+	}
+
+	footer {
+		background-color: $tumblr;
+		text-align: center;
+		padding: 15px;
+	}
+}
