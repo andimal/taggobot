@@ -1,0 +1,1 @@
+$.post("get_tags.py",{username:"andimal",limit:3},function(e){e=$.parseJSON(e);$(e).each(function(){$(".tags .output code table").append("<tr><td>"+this[0]+'</td><td class="count">'+this[1]+"</td></tr>")})});
