@@ -63,13 +63,6 @@ body {
 		margin: 20px 0;
 	}
 
-	input, button {
-		font-size: $input_text;
-		padding: 5px;
-		border: 0;
-		@include border-radius;
-	}
-
 	.arrow {
 		bottom: -30px;
 		right: 100px;
@@ -118,18 +111,30 @@ body {
 		.inside {
 			width: 80%;
 			margin: 0 auto;
+			text-align: center;
 		}
 
-		input, p, button {
+		input, p {
 			display: inline;
 		}
 
+		button {
+			display: block;
+			width: 40%;
+			margin: 40px auto 0 auto;
+		}
+
 		input {
-			width: 60%;
+			width: 40%;
+			font-family: $bookman;
+			font-size: $input_text;
+			height: auto;
+			margin-top: -5px;
 		}
 
 		p {
 			font-size: $input_text;
+			margin-left: 5px;
 		}
 
 		.arrow {
@@ -200,7 +205,7 @@ body {
 
 		.output-top {
 			margin-top: -20px;
-			// opacity: 0;
+			display: none;
 
 			.left, .right {
 				height: 10px;
