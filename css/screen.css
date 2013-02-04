@@ -45,29 +45,83 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block; }
 
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0; }
+
+  to {
+    background-position: 0 0; } }
+
+@-moz-keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0; }
+
+  to {
+    background-position: 0 0; } }
+
+@-ms-keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0; }
+
+  to {
+    background-position: 0 0; } }
+
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0; }
+
+  to {
+    background-position: 42px 0; } }
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0; }
+
+  to {
+    background-position: 0 0; } }
+
 a {
   color: #cccccc; }
 
 body {
   background-color: #333333;
-  font: 1em "Bookman Old Style", serif;
+  font: 1em "Bookman Old Style", "freight-sans-pro", sans-serif;
+  font-weight: 500;
   color: #cccccc; }
-  body h1, body h2 {
-    font-weight: bold; }
-  body h1 {
+  body h1, body h2, body .heading-shadow {
+    font-weight: 900; }
+  body h1, body .heading-shadow {
     font-size: 5em; }
+  body h1 {
+    position: relative;
+    z-index: 2;
+    background: -webkit-radial-gradient(50% 112%, 60% 100%, #cccccc 60%, #e0e0e0 63%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; }
+  body .heading-shadow {
+    color: #243a50;
+    position: absolute;
+    display: none;
+    text-align: center;
+    width: 100%;
+    z-index: 1; }
   body h2 {
     font-size: 2em;
-    margin: 20px 0; }
+    margin: 20px 0;
+    font-weight: 700;
+    text-shadow: 3px 3px 0px #243a50; }
   body .arrow {
     bottom: -30px;
     right: 100px; }
   body header, body .bot {
     border-bottom: 1px solid black; }
-  body .tags {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
-  body .bot, body .tags {
+  body .bot {
     border-top: 1px solid rgba(255, 255, 255, 0.2); }
+  body .bot-init, body .tags {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+  body .json-link {
+    display: none; }
   body footer {
     border-top: 1px solid black; }
   body header {
@@ -112,19 +166,100 @@ body {
       text-align: center; }
     body .bot input, body .bot p {
       display: inline; }
-    body .bot button {
+    body .bot .arrow {
+      display: none; }
+    body .bot .error {
+      border: 1px solid #660000;
+      background: #ffb3b3; }
+    body .bot .go {
       display: block;
       width: 40%;
-      margin: 40px auto 0 auto; }
+      margin: 40px auto 0 auto;
+      font-family: "Bookman Old Style", "freight-sans-pro", sans-serif;
+      font-weight: 500; }
+    body .bot .disabled {
+      opacity: 0.2;
+      -webkit-transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -o-transition: all 0.2s;
+      transition: all 0.2s; }
+    body .bot .going {
+      background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      -webkit-background-size: 42px 42px;
+      -moz-background-size: 42px 42px;
+      -o-background-size: 42px 42px;
+      background-size: 42px 42px;
+      -webkit-animation: progress-bar-stripes 1s linear infinite;
+      -moz-animation: progress-bar-stripes 1s linear infinite;
+      -ms-animation: progress-bar-stripes 1s linear infinite;
+      -o-animation: progress-bar-stripes 1s linear infinite;
+      animation: progress-bar-stripes 1s linear infinite; }
     body .bot input {
       width: 40%;
-      font-family: "Bookman Old Style", serif;
+      font-family: "Bookman Old Style", "freight-sans-pro", sans-serif;
       font-size: 2em;
+      font-weight: 500;
       height: auto;
-      margin-top: -5px; }
+      margin-top: -5px;
+      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bbbbbb), color-stop(20%, #cccccc), color-stop(80%, #cccccc), color-stop(100%, #bbbbbb));
+      background-image: -webkit-linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb);
+      background-image: -moz-linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb);
+      background-image: -o-linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb);
+      background-image: linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb); }
     body .bot p {
       font-size: 2em;
       margin-left: 5px; }
+    body .bot .limit-label {
+      display: block;
+      margin: 70px 0 30px 0; }
+    body .bot .limit {
+      background: rgba(76, 122, 168, 0.2);
+      padding: 0 5px;
+      margin: 0 -3px;
+      font-family: Verdana, sans-serif;
+      font-size: .9em; }
+    body .bot .limit-active {
+      border-bottom: 2px solid #2c4762; }
+    body .bot .slider {
+      width: 70%;
+      margin: 20px auto 100px auto;
+      padding: 1px 0;
+      border: 1px solid #cccccc;
+      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bbbbbb), color-stop(20%, #cccccc), color-stop(80%, #cccccc), color-stop(100%, #bbbbbb));
+      background-image: -webkit-linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb);
+      background-image: -moz-linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb);
+      background-image: -o-linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb);
+      background-image: linear-gradient(top, #bbbbbb, #cccccc 20%, #cccccc 80%, #bbbbbb); }
+    body .bot .ui-state-default {
+      background-color: #555;
+      border: 1px solid #777777;
+      -webkit-box-shadow: 0 0 5px 0 #333333;
+      -moz-box-shadow: 0 0 5px 0 #333333;
+      box-shadow: 0 0 5px 0 #333333;
+      -webkit-transition: background 0.2s;
+      -moz-transition: background 0.2s;
+      -o-transition: background 0.2s;
+      transition: background 0.2s; }
+    body .bot .ui-slider .ui-slider-handle {
+      height: 1.4em;
+      outline: none; }
+    body .bot .ui-state-hover {
+      cursor: pointer;
+      background: #2c4762;
+      -webkit-transition: background 0.2s;
+      -moz-transition: background 0.2s;
+      -o-transition: background 0.2s;
+      transition: background 0.2s; }
+    body .bot .ui-state-active {
+      background: #1c2d3f;
+      -webkit-transition: background 0.2s;
+      -moz-transition: background 0.2s;
+      -o-transition: background 0.2s;
+      transition: background 0.2s; }
     body .bot .arrow {
       position: absolute;
       z-index: 50;
@@ -155,7 +290,29 @@ body {
   body .tags {
     background-color: #666666;
     padding: 80px 0;
-    text-align: center; }
+    text-align: center;
+    display: none;
+    position: relative; }
+    body .tags .scissors {
+      position: absolute;
+      z-index: 2;
+      left: 2%;
+      top: 120px; }
+      body .tags .scissors img {
+        position: relative;
+        width: 80%;
+        cursor: pointer;
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        transition: all 0.2s; }
+      body .tags .scissors img:hover, body .tags .scissors .cutting {
+        width: 100%;
+        top: -7px;
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        transition: all 0.2s; }
     body .tags .outputter, body .tags .outputter-sides {
       position: relative;
       width: 80%;
@@ -291,6 +448,14 @@ body {
           background-image: -moz-linear-gradient(top, #0d0d0d, #666666 50%, #0d0d0d 100%);
           background-image: -o-linear-gradient(top, #0d0d0d, #666666 50%, #0d0d0d 100%);
           background-image: linear-gradient(top, #0d0d0d, #666666 50%, #0d0d0d 100%); }
+        body .tags .output .tear-off .cut-off {
+          height: 12px;
+          bottom: -9px;
+          background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #242424), color-stop(35%, #666666), color-stop(65%, #666666), color-stop(100%, #242424));
+          background-image: -webkit-linear-gradient(top, #242424, #666666 35%, #666666 65%, #242424 100%);
+          background-image: -moz-linear-gradient(top, #242424, #666666 35%, #666666 65%, #242424 100%);
+          background-image: -o-linear-gradient(top, #242424, #666666 35%, #666666 65%, #242424 100%);
+          background-image: linear-gradient(top, #242424, #666666 35%, #666666 65%, #242424 100%); }
       body .tags .output table {
         width: 100%; }
         body .tags .output table td {
@@ -306,10 +471,15 @@ body {
             padding: 0 0 10px 0; }
         body .tags .output table .count {
           text-align: right; }
+        body .tags .output table .no-tags {
+          border: 0;
+          padding: 10px 0; }
       body .tags .output pre {
         color: #00FF00;
         padding: 0 20% 20px 20%;
         text-align: left; }
+      body .tags .output .cut-off {
+        margin-top: 5px; }
   body footer {
     background-color: #2c4762;
     text-align: center;

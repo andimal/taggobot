@@ -70,10 +70,19 @@ tf = tempfile.NamedTemporaryFile(
 									suffix='.json'
 								)
 tf_name = tf.name
+name_split = tf_name.split('/')
+tf_name = name_split[len(name_split) - 1]
+
 # Write the json to the temp file
 tf.write(dump)
 # Close(don't delete) the file
 tf.close()
+
+# Add the temp filename to the array here(so it's not in the
+# json output file), re-sort and jsonify to send to the ui
+tags['temp_filename'] = tf_name
+sorted_tags = sorted(tags.iteritems(), key=operator.itemgetter(1), reverse=True)
+dump = json.dumps(sorted_tags, indent=4)
 
 # Return the json to the ui
 print dump

@@ -5,7 +5,8 @@ $dark		:	#333;
 $tumblr		:	#2c4762;
 $tags		:	lighten($dark, 20%);
 $copy		:	#CCC;
-$bookman	:	"Bookman Old Style", serif;
+$type		:	"Bookman Old Style", "freight-sans-pro", sans-serif;
+// $type		:	"freight-sans-pro", sans-serif;
 $mono		:	"Courier", monospace;
 $input_text	:	2em;
 $link		:	$copy;
@@ -19,6 +20,8 @@ $default-border-radius		:	4px;
 $default-box-shadow-blur	:	20px;
 $default-box-shadow-h-offset:	-2px;
 $default-box-shadow-v-offset:	2px;
+$default-transition-property:	background;
+$default-transition-duration:	.2s;
 
 @mixin arrow($x, $y, $color) {
 	position: absolute;
@@ -41,26 +44,91 @@ $default-box-shadow-v-offset:	2px;
 	right: 99px;
 }
 
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-moz-keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-ms-keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 42px 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 42px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
 a {
 	color: $link;
 }
 
 body {
 	background-color: $dark;
-	font: 1em $bookman;
+	font: 1em $type;
+	font-weight: 500;
 	color: $copy;
 
-	h1, h2 {
-		font-weight: bold;
+	h1, h2, .heading-shadow {
+		font-weight: 900;
+	}
+
+	h1, .heading-shadow {
+		font-size: 5em;
 	}
 
 	h1 {
-		font-size: 5em;
+		position: relative;
+		z-index: 2;
+		background: -webkit-radial-gradient(50% 112%, 60% 100%, $copy 60%, lighten($copy, 8%) 63%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.heading-shadow {
+		color: darken($tumblr, 5%);
+		position: absolute;
+		display: none;
+		text-align: center;
+		width: 100%;
+		z-index: 1;
 	}
 
 	h2 {
 		font-size: 2em;
 		margin: 20px 0;
+		font-weight: 700;
+		text-shadow: 3px 3px 0px darken($tumblr, 5%);
 	}
 
 	.arrow {
@@ -72,12 +140,17 @@ body {
 		border-bottom: 1px solid $lowlight;
 	}
 
-	.tags {
+	.bot {
+		border-top: 1px solid $highlight;
+	}
+
+	.bot-init, .tags {
+		border-top: 1px solid $highlight;
 		border-bottom: 1px solid $highlight;
 	}
 
-	.bot, .tags {
-		border-top: 1px solid $highlight;
+	.json-link {
+		display: none;
 	}
 
 	footer {
@@ -118,23 +191,108 @@ body {
 			display: inline;
 		}
 
-		button {
+		.arrow {
+			display: none;
+		}
+
+		.error {
+			border: 1px solid darken(red, 30%);
+			background: lighten(red, 35%);
+		}
+
+		.go {
 			display: block;
 			width: 40%;
 			margin: 40px auto 0 auto;
+			font-family: $type;
+			font-weight: 500;
+		}
+
+		.disabled {
+			opacity: 0.2;
+			@include single-transition(all, .2s);
+		}
+
+		.going {
+			background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+			background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+			background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+			background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+			background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+
+			-webkit-background-size: 42px 42px;
+			 -moz-background-size: 42px 42px;
+			   -o-background-size: 42px 42px;
+			      background-size: 42px 42px;
+
+			-webkit-animation: progress-bar-stripes 1s linear infinite;
+		     -moz-animation: progress-bar-stripes 1s linear infinite;
+		      -ms-animation: progress-bar-stripes 1s linear infinite;
+		       -o-animation: progress-bar-stripes 1s linear infinite;
+		          animation: progress-bar-stripes 1s linear infinite;
 		}
 
 		input {
 			width: 40%;
-			font-family: $bookman;
+			font-family: $type;
 			font-size: $input_text;
+			font-weight: 500;
 			height: auto;
 			margin-top: -5px;
+			@include background-image(linear-gradient(top, #BBB, #CCC 20%, #CCC 80%, #BBB ));
 		}
 
 		p {
 			font-size: $input_text;
 			margin-left: 5px;
+		}
+
+		.limit-label {
+			display: block;
+			margin: 70px 0 30px 0;
+		}
+
+		.limit {
+			background: rgba(lighten($tumblr, 20%), 0.2);
+			padding: 0 5px;
+			margin: 0 -3px;
+			font-family: Verdana, sans-serif;
+			font-size: .9em;
+		}
+
+		.limit-active {
+			border-bottom: 2px solid $tumblr;
+		}
+
+		.slider {
+			width: 70%;
+			margin: 20px auto 100px auto;
+			padding: 1px 0;
+			border: 1px solid #CCC;
+			@include background-image(linear-gradient(top, #BBB, #CCC 20%, #CCC 80%, #BBB ));
+		}
+
+		.ui-state-default {
+			background-color: #555;
+			border: 1px solid #777;
+			@include single-box-shadow(#333, 0, 0, 5px, 0, false);
+			@include transition;
+		}
+
+		.ui-slider .ui-slider-handle {
+			height: 1.4em;
+			outline: none;
+		}
+
+		.ui-state-hover {
+			cursor: pointer;
+			background: $tumblr;
+			@include transition;
+		}
+
+		.ui-state-active {
+			background: darken($tumblr, 10%);
+			@include transition;
 		}
 
 		.arrow {
@@ -154,6 +312,28 @@ body {
 		background-color: $tags;
 		padding: 80px 0;
 		text-align: center;
+		display: none;
+		position: relative;
+
+		.scissors {
+			position: absolute;
+			z-index: 2;
+			left: 2%;
+			top: 120px;
+
+			img {
+				position: relative;
+				width: 80%;
+				cursor: pointer;
+				@include single-transition(all, .2s);
+			}
+
+			img:hover, .cutting {
+				width: 100%;
+				top: -7px;
+				@include single-transition(all, .2s);
+			}
+		}
 
 		.outputter, .outputter-sides {
 			position: relative;
@@ -277,6 +457,12 @@ body {
 					height: 6px;
 					@include background-image(linear-gradient(top, darken($output, 10%), $tags 50%, darken($output, 10%) 100% ));
 				}
+
+				.cut-off {
+					height: 12px;
+					bottom: -9px;
+					@include background-image(linear-gradient(top, darken($output, 1%), $tags 35%, $tags 65%, darken($output, 1%) 100% ));
+				}
 			}
 
 			table {
@@ -304,12 +490,21 @@ body {
 				.count {
 					text-align: right;
 				}
+
+				.no-tags {
+					border: 0;
+					padding: 10px 0;
+				}
 			}
 
 			pre {
 				color: #00FF00;
 				padding: 0 20% 20px 20%;
 				text-align: left;
+			}
+
+			.cut-off {
+				margin-top: 5px;
 			}
 		}
 	}
