@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Generate a json file of your tumblr tags">
+		<meta name="keywords" content="tumblr,tags,json">
+		<meta name="author" content="Andy Richardson">
+		<title>taggobot</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.0.custom.css">
+		<script type="text/javascript" src="//use.typekit.net/kau4unw.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	</head>
+	<body>
+		<header>
+			<h1>taggobot</h1>
+			<p class="heading-shadow">taggobot</p>
+			<h2>tumblr tags for all</h2>
+			<div class="arrow high"></div>
+			<div class="arrow low"></div>
+			<div class="arrow"></div>
+
+			<a href="https://github.com/andimal/taggobot"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+		</header>
+
+		<div class="bot bot-init">
+			<div class="inside">
+				<form>
+					<fieldset>
+						<input class="username" type="text" /><p>.tumblr.com</p>
+						<p class="limit-label">Include tags used at least <span class="limit">4</span> times.</p>
+						<div class="slider"></div>
+						<button class="btn btn-large btn-block btn-primary disabled go">Go!</button>
+					</fieldset>
+				</form>
+			</div>
+			<div class="arrow high"></div>
+			<div class="arrow low"></div>
+			<div class="arrow"></div>
+		</div>
+
+		<div class="tags">
+			<div class="scissors">
+				<img src="img/scissors.png" />
+			</div>
+			<div class="outputter-sides"></div>
+			<div class="outputter">
+				<div class="slot"></div>
+			</div>
+			<div class="output-top">
+				<div class="left"></div>
+				<div class="left-shadow"></div>
+				<div class="right"></div>
+			</div>
+			<div class="output-mask">
+				<div class="output">
+					<div class="tear-off">
+						<div class="cut"></div>
+					</div>
+					<pre>
+						<code>
+							<table>
+								<tr class="title">
+									<td colspan="2"></td>
+								<tr class="sub">
+									<td>tag</td>
+									<td class="count">#</td>
+								</tr>
+							</table>
+						</code>
+						<a class="btn btn-inverse" href="#" target="_blank">Download again</a>
+					</pre>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			<p>taggobot by <a href="http://andyyyy.com">andyyyy</a></p>
+		</footer>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="js/script-min.js" type="text/javascript"></script>
+	</body>
+</html>
