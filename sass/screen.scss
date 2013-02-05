@@ -448,6 +448,7 @@ body {
 				position: relative;
 				height: 30px;
 				border-bottom: dashed 2px darken($tags, 20%);
+				@include single-transition(all, .2s);
 
 				.cut {
 					position: absolute;
@@ -455,7 +456,7 @@ body {
 					bottom: -4px;
 					width: 0;
 					height: 6px;
-					@include background-image(linear-gradient(top, darken($output, 10%), $tags 50%, darken($output, 10%) 100% ));
+					@include background-image(linear-gradient(top, darken($output, 4%), $tags 50%, darken($output, 4%) 100% ));
 				}
 
 				.cut-off {
@@ -463,6 +464,11 @@ body {
 					bottom: -9px;
 					@include background-image(linear-gradient(top, darken($output, 1%), $tags 35%, $tags 65%, darken($output, 1%) 100% ));
 				}
+			}
+
+			.show-cut {
+				border-color: darken($outputter, 0%);
+				@include single-transition(all, .2s);
 			}
 
 			table {
@@ -501,6 +507,15 @@ body {
 				color: #00FF00;
 				padding: 0 20% 20px 20%;
 				text-align: left;
+
+				a {
+					display: none;
+					position: absolute;
+					bottom: 20px;
+					right: 20px;
+					text-decoration: none;
+					color: $copy;
+				}
 			}
 
 			.cut-off {
@@ -513,5 +528,11 @@ body {
 		background-color: $tumblr;
 		text-align: center;
 		padding: 15px;
+	}
+}
+
+@media all and (max-width: 465px) {
+	body {
+		font-size: .8em;
 	}
 }

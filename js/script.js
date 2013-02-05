@@ -4,9 +4,22 @@ $('.heading-shadow').css({
 	'display'	: 'block'
 });
 
-var drag_x = 0;
-$( ".scissors" ).draggable({
-	axis: "x",
+var drag_x = 0,
+	is_first_click = true;
+
+$('.scissors').mousedown(function () {
+	if (is_first_click) {
+		$('.tear-off').addClass('show-cut');
+		setTimeout(function () {
+			$('.tear-off').removeClass('show-cut');
+			is_first_click = false;
+		}, 200);
+	}
+});
+
+$( '.scissors').draggable({
+	axis: 'x',
+	containment: 'window',
 	start: function () {
 		$(this).find('img').addClass('cutting');
 	},
@@ -24,6 +37,8 @@ $( ".scissors" ).draggable({
 				width: left_to
 			}, 800, function() {
 				window.open('tmp/' + temp_file);
+				$('pre a').attr('href', 'tmp/' + temp_file);
+				$('pre a').fadeIn();
 			});
 		};
 	},
@@ -100,7 +115,12 @@ function post () {
 			}, 'slow', function() {
 				$('.output').animate({
 					top: 0
-				}, 1000);
+				}, 1000, function() {
+					$('.scissors img').addClass('cutting');
+					setTimeout(function () {
+						$('.scissors img').removeClass('cutting');
+					}, 200);
+				});
 			});
 		}
 
