@@ -1,7 +1,5 @@
 taggobot
-========
+--------
 
-Get your tumblr tags in a nice, tidy, json file.
-------------------------------------------------
-
-You can then upload the json file to a server and grab it from a tumblr theme.
+1. Get your tumblr tags in a nice, tidy, json file.
+2. You can then upload the json file to a server and grab it from a tumblr theme.
