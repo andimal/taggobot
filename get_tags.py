@@ -5,6 +5,7 @@ print
 import urllib2, json, operator, cgi, tempfile
 # Get posted data
 form = cgi.FieldStorage()
+callback = form['callback'].value
 username = form['username'].value
 limit = form['limit'].value
 
@@ -85,6 +86,7 @@ sorted_tags = sorted(tags.iteritems(), key=operator.itemgetter(1), reverse=True)
 dump = json.dumps(sorted_tags, indent=4)
 
 # Return the json to the ui
-print dump
+# print dump
+print '{0}({1})'.format(callback, dump)
 
 
