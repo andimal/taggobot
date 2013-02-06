@@ -71,13 +71,11 @@ function reset () {
 function post () {
 	username = $('.username').val();
 	limit = $('.limit').text();
-	$.post('get_tags.py', { username: username, limit: limit }, function(data) {
+	$.getJSON('get_tags.py', { username: username, limit: limit }, function(data) {
 
 		if(!data) {
 			$('.username').addClass('error');
 		} else {
-			data = $.parseJSON(data);
-
 			$('.title td').text(username.toUpperCase() + '\'S TAGS W/ ' + limit + '+');
 
 			reset();
