@@ -5,7 +5,8 @@ $('.heading-shadow').css({
 });
 
 var drag_x = 0,
-	is_first_click = true;
+	is_first_click = true,
+	temp_file;
 
 $('.scissors').mousedown(function () {
 	if (is_first_click) {
@@ -40,7 +41,7 @@ $( '.scissors').draggable({
 				$('pre a').attr('href', 'tmp/' + temp_file);
 				$('pre a').fadeIn();
 			});
-		};
+		}
 	},
 	drag: function (event, ui) {
 		var left = $('.output').offset().left - 30;
@@ -53,8 +54,7 @@ $( '.scissors').draggable({
 });
 
 var username,
-	limit,
-	temp_file;
+	limit;
 
 function reset () {
 	$('table tr').each(function() {
@@ -75,11 +75,11 @@ function post () {
 	$.ajax({
 		url: 'get_tags.py',
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: { username: username, limit: limit },
 		error: function () {
 			$('.username').addClass('error');
-	    },
+		},
 		success: function(data) {
 			if(!data) {
 				$('.username').addClass('error');
@@ -176,5 +176,5 @@ $('.go').click(function() {
 		post();
 	} else {
 		$('.username').addClass('error');
-	};
+	}
 });

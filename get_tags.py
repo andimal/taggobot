@@ -1,11 +1,9 @@
-#!/usr/bin/python
-print "Content-type: text/plain"
-print
+#!/usr/local/bin/python2.7
+print "Content-type: text/plain\n"
 
-import urllib2, json, operator, cgi, tempfile
+import urllib2, json, operator, cgi, tempfile, os, stat
 # Get posted data
 form = cgi.FieldStorage()
-callback = form['callback'].value
 username = form['username'].value
 limit = form['limit'].value
 
@@ -19,40 +17,40 @@ posts = info['response']['blog']['posts']
 
 # Tumblr limits responses to 20; this gets the needed loop count
 if posts % 20 > 0:
-	loop_num = (posts / 20) + 2
+  loop_num = (posts / 20) + 2
 else:
-	loop_num = posts / 20 + 1
+  loop_num = posts / 20 + 1
 
 # A dict for the tags
 tags = {}
 
 for x in xrange(0,loop_num):
-	
-	# Set the offset number needed to get the next set of posts
-	y = x * 20
-	# Query for the response
-	g = urllib2.urlopen(address + '&offset=' + str(y))
+  
+  # Set the offset number needed to get the next set of posts
+  y = x * 20
+  # Query for the response
+  g = urllib2.urlopen(address + '&offset=' + str(y))
 
-	# Load the json
-	feed = json.loads(g.read())
+  # Load the json
+  feed = json.loads(g.read())
 
-	# For each post...
-	for post in feed['response']['posts']:
-		# For each tag in that post...
-		for tag in post['tags']:
-			tag = tag.lower()
-			# If it's not in the tags dict yet, add it with a count of 1
-			if tag not in tags:
-				tags[tag] = 1
-			# If it is in there, increase its count
-			else:
-				tags[tag] += 1
+  # For each post...
+  for post in feed['response']['posts']:
+    # For each tag in that post...
+    for tag in post['tags']:
+      tag = tag.lower()
+      # If it's not in the tags dict yet, add it with a count of 1
+      if tag not in tags:
+        tags[tag] = 1
+      # If it is in there, increase its count
+      else:
+        tags[tag] += 1
 
 # For each tag in the dict...
 for tag in tags.keys():
-	# If the tag's count is less than the posted limit, get rid of it
-	if tags[tag] < int(limit):
-		del tags[tag]
+  # If the tag's count is less than the posted limit, get rid of it
+  if tags[tag] < int(limit):
+    del tags[tag]
 
 # Most-used tags first
 sorted_tags = sorted(tags.iteritems(), key=operator.itemgetter(1), reverse=True)
@@ -65,14 +63,17 @@ temp_dir = 'tmp/'
 temp_prefix = username + '_'
 # Create the temp file
 tf = tempfile.NamedTemporaryFile(
-									delete=False,
-									dir=temp_dir,
-									prefix=temp_prefix,
-									suffix='.json'
-								)
+                  delete=False,
+                  dir=temp_dir,
+                  prefix=temp_prefix,
+                  suffix='.json'
+                )
 tf_name = tf.name
 name_split = tf_name.split('/')
 tf_name = name_split[len(name_split) - 1]
+
+# Make the file accessible
+os.chmod('tmp/' + tf_name, 0755)
 
 # Write the json to the temp file
 tf.write(dump)
@@ -87,6 +88,4 @@ dump = json.dumps(sorted_tags, indent=4)
 
 # Return the json to the ui
 # print dump
-print '{0}({1})'.format(callback, dump)
-
-
+print dump
