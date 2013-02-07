@@ -2,8 +2,4 @@ taggobot
 --------
 
 1. Get your tumblr tags in a nice, tidy, json file.
-2. You can then upload the json file to a server and grab it from a tumblr theme.
-
-The github pages branch has a couple differences. It wouldn't allow the js to post to the python file, so I jsonp to that thang on my server.
-- js: .ajax call instead of .post to post jsonp, remove .parseJSON
-- python: return the tags with the jsonp callback
+2. Upload the json file to a server and grab it from a tumblr theme.
