@@ -157,8 +157,8 @@ $('.username').keyup(function() {
 	}
 });
 
-$('.go').click(function() {
-	event.preventDefault();
+$('.go').click(function(e) {
+	e.preventDefault();
 	if (!$(this).hasClass('disabled')) {
 		$('.username').removeClass('error');
 		$(this).addClass('disabled going');
@@ -167,4 +167,5 @@ $('.go').click(function() {
 	} else {
 		$('.username').addClass('error');
 	};
+	return false;
 });
